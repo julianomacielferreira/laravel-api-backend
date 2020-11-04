@@ -4,3 +4,10 @@ Homestead.json
 Homestead.yaml
 .env
 .phpunit.result.cache
+
+# docker files
+docker/mysql/data/*
+core
+
+# backup files
+*.bak
