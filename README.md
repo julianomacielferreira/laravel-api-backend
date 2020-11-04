@@ -161,7 +161,9 @@ The output:
 Example:
 
 ```bash
-$ curl -d '{"title":"Title New","description":"Description New","status":1}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/articles
+$ curl -d '{"title":"Title New","description":"Description New","status":1}' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/api/articles
 ```
 
 The output:
@@ -184,7 +186,9 @@ The output:
 Example:
 
 ```bash
-$ curl -d '{"idArticle":1, "title":"Title Updated","description":"Description Updated","status":1}' -H "Content-Type: application/json" -X PUT http://localhost:8080/api/articles/19
+$ curl -d '{"idArticle":1, "title":"Title Updated","description":"Description Updated","status":1}' \
+-H "Content-Type: application/json" \
+-X PUT http://localhost:8080/api/articles/19
 ```
 
 The output:

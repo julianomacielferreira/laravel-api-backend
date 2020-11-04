@@ -15,5 +15,5 @@ ENDPOINT='api/articles/19'
 curl --data "$JSON_DATA" -H "$HEADER" -X PUT "$DOMAIN/$ENDPOINT" > curl-output.html
 
 ########## DELETE ############
-ENDPOINT='api/articles/33'
+ENDPOINT='api/articles/29'
 curl -X DELETE "$DOMAIN/$ENDPOINT" > curl-output.html
