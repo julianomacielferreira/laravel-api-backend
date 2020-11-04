@@ -25,6 +25,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use Illulinate\Http\Request;
+
 class ArticlesController extends Controller
 {
     /**
@@ -39,6 +42,6 @@ class ArticlesController extends Controller
 
     public function showAll()
     {
-        dd("ArticlesController@showAll");
+        return response()->json(Article::all());
     }
 }

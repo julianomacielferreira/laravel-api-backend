@@ -112,3 +112,11 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## References
+
+- [Laravel](https://laravel.com/)
+- [The Lumen framework](https://lumen.laravel.com/)
+- [MySQL](https://mysql.com)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/install/)

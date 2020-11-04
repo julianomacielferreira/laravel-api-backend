@@ -31,11 +31,18 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'article';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'title', 'description', 'status'
     ];
 }
