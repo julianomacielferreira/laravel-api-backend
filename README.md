@@ -96,6 +96,56 @@ And then access [http://localhost:8080/](http://localhost:8080/) on your browser
 
 # Enpoints
 
+- List of Articles: **api/articles**
+
+Example:
+
+```bash
+$ curl http://localhost:8080/api/articles/
+```
+
+The output:
+
+```json
+[
+    {
+        "idArticle":1,
+        "title":"Title",
+        "description":"Description",
+        "status":1,
+        "created_at":"2020-11-04T15:12:49.000000Z","updated_at":"2020-11-04T15:12:49.000000Z"
+    },{
+        "idArticle":2,
+        "title":"Title",
+        "description":"Description",
+        "status":1,
+        "created_at":"2020-11-04T15:12:50.000000Z","updated_at":"2020-11-04T15:12:50.000000Z"
+    }
+...
+]
+```
+
+- Retrieve an Article by primary key: **api/articles/{id}**
+
+
+```bash
+$ curl http://localhost:8080/api/articles/1
+```
+
+The output:
+
+```json
+[
+    {
+        "idArticle":1,
+        "title":"Title",
+        "description":"Description",
+        "status":1,
+        "created_at":"2020-11-04T15:12:49.000000Z","updated_at":"2020-11-04T15:12:49.000000Z"
+    }
+]
+```
+
 @TODO - Define
 
 ## Lumen PHP Framework

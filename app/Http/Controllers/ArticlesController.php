@@ -37,11 +37,17 @@ class ArticlesController extends Controller
      */
     public function __construct()
     {
-        //
     }
 
-    public function showAll()
+    public function listAll()
     {
         return response()->json(Article::all());
+    }
+
+    public function get($id)
+    {
+        $article = Article::where('idArticle', $id)->get();
+
+        return response()->json($article);
     }
 }

@@ -40,5 +40,6 @@ $router->get('/', function () use ($router) {
 $router->group([
     'prefix' => 'api'
 ], function ($router) {
-    $router->get('articles', 'ArticlesController@showAll');
+    $router->get('articles', 'ArticlesController@listAll');
+    $router->get('articles/{id}', 'ArticlesController@get');
 });
