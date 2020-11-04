@@ -161,6 +161,9 @@ Example:
 $ curl -d '{"title":"Title New","description":"Description New","status":1}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/articles
 ```
 
+The output is the id (primary key) of the article;
+
+
 @TODO - Define
 
 ## Lumen PHP Framework

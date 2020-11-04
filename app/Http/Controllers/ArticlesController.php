@@ -26,7 +26,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use Illulinate\Http\Request;
+use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
@@ -39,7 +39,7 @@ class ArticlesController extends Controller
     {
     }
 
-    public function listAll()
+    public function list()
     {
         return response()->json(Article::all());
     }
@@ -49,5 +49,20 @@ class ArticlesController extends Controller
         $article = Article::where('idArticle', $id)->get();
 
         return response()->json($article);
+    }
+
+    public function create(Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'title' => 'required',
+                'description' => 'required',
+            ]
+        );
+
+        $article = Article::create($request->all());
+
+        return $article->id;
     }
 }
