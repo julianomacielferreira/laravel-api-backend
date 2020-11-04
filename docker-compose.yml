@@ -10,8 +10,8 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: laravel-api
-            MYSQL_USER: root
+            MYSQL_DATABASE: laravel_api
+            MYSQL_USER: laravel
             MYSQL_PASSWORD: password
         ports:
             - "3306:3306"

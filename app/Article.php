@@ -23,19 +23,19 @@
  * THE SOFTWARE.
  */
 
-namespace App\Http\Controllers;
+namespace App;
 
-class ExampleController extends Controller
+use Illuminate\Database\Eloquent\Model;
+
+
+class Article extends Model
 {
     /**
-     * Create a new controller instance.
+     * The attributes that are mass assignable.
      *
-     * @return void
+     * @var array
      */
-    public function __construct()
-    {
-        //
-    }
-
-    //
+    protected $fillable = [
+        'name', 'email',
+    ];
 }
