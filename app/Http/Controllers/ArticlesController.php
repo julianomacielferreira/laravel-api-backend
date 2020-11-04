@@ -63,6 +63,6 @@ class ArticlesController extends Controller
 
         $article = Article::create($request->all());
 
-        return $article->id;
+        return response()->json($article, 201);
     }
 }

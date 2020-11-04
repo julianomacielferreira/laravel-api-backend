@@ -161,8 +161,18 @@ Example:
 $ curl -d '{"title":"Title New","description":"Description New","status":1}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/articles
 ```
 
-The output is the id (primary key) of the article;
+The output:
 
+```json
+{
+    "title":"Title New",
+    "description":"Description New",
+    "status":"1",
+    "updated_at":"2020-11-04T20:17:38.000000Z",
+    "created_at":"2020-11-04T20:17:38.000000Z",
+    "id":20
+}
+```
 
 @TODO - Define
 
