@@ -40,6 +40,27 @@ $router->get('/', function () use ($router) {
 $router->group([
     'prefix' => 'api'
 ], function ($router) {
-    $router->get('articles', 'ArticlesController@listAll');
-    $router->get('articles/{id}', 'ArticlesController@get');
+
+    // Article Routes
+    $controller = 'ArticlesController';
+    $URL = 'articles';
+
+    // Just add the GET endpoints here
+    $get_endpoints = [
+        $URL => "{$controller}@list",
+        "{$URL}/{id}" => "{$controller}@get"
+    ];
+
+    // Just add the POST endpoints here
+    $post_endpoints = [
+        $URL => "{$controller}@create"
+    ];
+
+    foreach ($get_endpoints as $get => $endpoint) {
+        $router->get($get, $endpoint);
+    }
+
+    foreach ($post_endpoints as $post => $endpoint) {
+        $router->post($post, $endpoint);
+    }
 });
