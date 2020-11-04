@@ -1,4 +1,4 @@
-# Simple Laravel API
+# Simple API using Laravel Lumen
 
 This project is based on the Youtube tutorial [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U).
 
@@ -83,6 +83,16 @@ $ docker-compose stop
 ```
 
 See the [references section](#references) to know more or take a look at [MySQL Docker Documentation](https://docs.docker.com/samples/library/mysql/).
+
+# Runing the App
+
+In the root project folder start up the project:
+
+```bash
+$ php -S localhost:8080 -t public
+```
+
+And then access [http://localhost:8080/](http://localhost:8080/) on your browser.
 
 # Enpoints
 
