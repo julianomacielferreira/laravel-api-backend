@@ -77,7 +77,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->delete();
 
-        return response('Deleted successfully');
+        return response('Deleted successfully', 200);
     }
 
     private function validate_request(Request $request)
