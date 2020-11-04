@@ -48,7 +48,7 @@ $router->group([
     // Just add the GET endpoints here
     $get_endpoints = [
         $URL => "{$controller}@list",
-        "{$URL}/{id}" => "{$controller}@get"
+        $URL . "/{id}" => "{$controller}@get"
     ];
 
     // Just add the POST endpoints here
