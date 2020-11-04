@@ -96,7 +96,9 @@ And then access [http://localhost:8080/](http://localhost:8080/) on your browser
 
 # Enpoints
 
-- List of Articles: **api/articles**
+### List of Articles: 
+
+- **/api/articles**
 
 Example:
 
@@ -124,7 +126,10 @@ The output:
 ]
 ```
 
-- Retrieve an Article by primary key: **api/articles/{id}**
+### Retrieve an Article by primary key:
+
+- **/api/articles/{id}**
+- **id**: number representing the primary key
 
 Example:
 
