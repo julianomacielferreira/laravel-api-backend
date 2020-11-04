@@ -68,7 +68,16 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->update($request->all());
 
-        return response()->json($article, 201);
+        return response()->json($article, 200);
+    }
+
+    public function delete($id)
+    {
+
+        $article = Article::findOrFail($id);
+        $article->delete();
+
+        return response('Deleted successfully');
     }
 
     private function validate_request(Request $request)

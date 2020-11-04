@@ -54,4 +54,7 @@ $router->group([
     
     // PUT endpoints
     $router->put($articleURL. "/{id}", "{$articlesController}@put");
+
+    // DELETE endpoints
+    $router->delete($articleURL. "/{id}", "{$articlesController}@delete");
 });

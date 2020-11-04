@@ -13,3 +13,7 @@ curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" > curl-output.
 JSON_DATA='{"idArticle": 19, "title":"Title Update","description":"Description Update","status":"1"}'
 ENDPOINT='api/articles/19'
 curl --data "$JSON_DATA" -H "$HEADER" -X PUT "$DOMAIN/$ENDPOINT" > curl-output.html
+
+########## DELETE ############
+ENDPOINT='api/articles/33'
+curl -X DELETE "$DOMAIN/$ENDPOINT" > curl-output.html

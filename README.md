@@ -96,7 +96,7 @@ And then access [http://localhost:8080/](http://localhost:8080/) on your browser
 
 # Enpoints
 
-### List of Articles (GET): 
+### List all Articles (GET): 
 
 - **/api/articles**
 
@@ -126,7 +126,7 @@ The output:
 ]
 ```
 
-### Retrieve an Article by primary key (GET):
+### Retrieve an Article (GET):
 
 - **/api/articles/{id}**
 - **id**: number representing the primary key
@@ -152,7 +152,7 @@ The output:
 ]
 ```
 
-### Create an Articles (POST): 
+### Create an Article (POST): 
 
 - **/api/articles**
 
@@ -170,12 +170,50 @@ The output:
     "description":"Description New",
     "status":"1",
     "updated_at":"2020-11-04T20:17:38.000000Z",
-    "created_at":"2020-11-04T20:17:38.000000Z",
-    "id":20
+    "created_at":"2020-11-04T20:17:38.000000Z"
 }
 ```
 
-@TODO - Define
+### Update an Article (PUT): 
+
+- **/api/articles/{id}**
+- **id**: number representing the primary key
+
+Example:
+
+```bash
+$ curl -d '{"idArticle":1, "title":"Title Updated","description":"Description Updated","status":1}' -H "Content-Type: application/json" -X PUT http://localhost:8080/api/articles/19
+```
+
+The output:
+
+```json
+{
+    "idArticle":1,
+    "title":"Title Updated",
+    "description":"Description Updated",
+    "status":"1",
+    "updated_at":"2020-11-04T20:17:38.000000Z",
+    "created_at":"2020-11-04T20:17:38.000000Z"
+}
+```
+
+### Delete an Article (DELETE): 
+
+- **/api/articles/{id}**
+- **id**: number representing the primary key
+
+Example:
+
+```bash
+$ curl -X DELETE http://localhost:8080/api/articles/19
+```
+
+The output:
+
+```bash
+Deleted successfully
+```
 
 ## Lumen PHP Framework
 
