@@ -121,12 +121,12 @@ The output:
         "status":1,
         "created_at":"2020-11-04T15:12:50.000000Z","updated_at":"2020-11-04T15:12:50.000000Z"
     }
-...
 ]
 ```
 
 - Retrieve an Article by primary key: **api/articles/{id}**
 
+Example:
 
 ```bash
 $ curl http://localhost:8080/api/articles/1
