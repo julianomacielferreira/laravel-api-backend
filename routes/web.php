@@ -42,25 +42,16 @@ $router->group([
 ], function ($router) {
 
     // Article Routes
-    $controller = 'ArticlesController';
-    $URL = 'articles';
+    $articlesController = 'ArticlesController';
+    $articleURL = 'articles';
 
-    // Just add the GET endpoints here
-    $get_endpoints = [
-        $URL => "{$controller}@list",
-        $URL . "/{id}" => "{$controller}@get"
-    ];
+    // GET endpoints
+    $router->get($articleURL, "{$articlesController}@list");
+    $router->get($articleURL . "/{id}", "{$articlesController}@get");
 
-    // Just add the POST endpoints here
-    $post_endpoints = [
-        $URL => "{$controller}@create"
-    ];
-
-    foreach ($get_endpoints as $get => $endpoint) {
-        $router->get($get, $endpoint);
-    }
-
-    foreach ($post_endpoints as $post => $endpoint) {
-        $router->post($post, $endpoint);
-    }
+    // POST endpoints
+    $router->post($articleURL, "{$articlesController}@create");
+    
+    // PUT endpoints
+    $router->put($articleURL. "/{id}", "{$articlesController}@put");
 });

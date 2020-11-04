@@ -146,7 +146,8 @@ The output:
         "title":"Title",
         "description":"Description",
         "status":1,
-        "created_at":"2020-11-04T15:12:49.000000Z","updated_at":"2020-11-04T15:12:49.000000Z"
+        "created_at":"2020-11-04T15:12:49.000000Z",
+        "updated_at":"2020-11-04T15:12:49.000000Z"
     }
 ]
 ```

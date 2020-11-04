@@ -46,13 +46,34 @@ class ArticlesController extends Controller
 
     public function get($id)
     {
-        $article = Article::where('idArticle', $id)->get();
+        $article = Article::find($id);
 
         return response()->json($article);
     }
 
     public function create(Request $request)
     {
+        $this->validate_request($request);
+
+        $article = Article::create($request->all());
+
+        return response()->json($article, 201);
+    }
+
+    public function put($id, Request $request)
+    {
+
+        $this->validate_request($request);
+
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+
+        return response()->json($article, 201);
+    }
+
+    private function validate_request(Request $request)
+    {
+
         $this->validate(
             $request,
             [
@@ -60,9 +81,5 @@ class ArticlesController extends Controller
                 'description' => 'required',
             ]
         );
-
-        $article = Article::create($request->all());
-
-        return response()->json($article, 201);
     }
 }
