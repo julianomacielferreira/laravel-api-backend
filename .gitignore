@@ -11,3 +11,6 @@ core
 
 # backup files
 *.bak
+
+# cURL output
+curl-output.html

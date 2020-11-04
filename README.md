@@ -96,7 +96,7 @@ And then access [http://localhost:8080/](http://localhost:8080/) on your browser
 
 # Enpoints
 
-### List of Articles: 
+### List of Articles (GET): 
 
 - **/api/articles**
 
@@ -126,7 +126,7 @@ The output:
 ]
 ```
 
-### Retrieve an Article by primary key:
+### Retrieve an Article by primary key (GET):
 
 - **/api/articles/{id}**
 - **id**: number representing the primary key
@@ -149,6 +149,16 @@ The output:
         "created_at":"2020-11-04T15:12:49.000000Z","updated_at":"2020-11-04T15:12:49.000000Z"
     }
 ]
+```
+
+### Create an Articles (POST): 
+
+- **/api/articles**
+
+Example:
+
+```bash
+$ curl -d '{"title":"Title New","description":"Description New","status":1}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/articles
 ```
 
 @TODO - Define
