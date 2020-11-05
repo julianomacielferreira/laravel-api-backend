@@ -7,7 +7,10 @@ HEADER='Content-Type: application/json'
 
 ########## INSERT ############
 JSON_DATA='{"title":"Title New","description":"Description New","status":"1"}'
-curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" > curl-output.html
+for i in {1..100}
+do
+    curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" > curl-output.html
+done
 
 ########## UPDATE ############
 JSON_DATA='{"idArticle": 19, "title":"Title Update","description":"Description Update","status":"1"}'

@@ -100,6 +100,12 @@ See the [references section](#references) to know more or take a look at [MySQL 
 
 # Runing the App
 
+Run the migration command after docker start:
+
+```bash
+$ php artisan migrate
+```
+
 In the root project folder start up the project:
 
 ```bash

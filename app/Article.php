@@ -38,13 +38,6 @@ class Article extends Model
     protected $table = 'article';
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'idArticle';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
