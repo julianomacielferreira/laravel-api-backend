@@ -1,6 +1,6 @@
 # Simple API using Laravel Lumen
 
-This project is based on the Youtube tutorial [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U).
+This project is based on the youtube tutorials [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U) and [Laravel RESTFul API with JSON Web Token JWT](https://www.youtube.com/watch?v=jF9wdF0sViI).
 
 It's using [Lumen PHP Framework](https://lumen.laravel.com/).
 
@@ -85,6 +85,12 @@ $ docker-compose stop
 See the [references section](#references) to know more or take a look at [MySQL Docker Documentation](https://docs.docker.com/samples/library/mysql/).
 
 # Runing the App
+
+In the root project folder install composer packages:
+
+```bash
+$ composer install
+```
 
 In the root project folder start up the project:
 
@@ -250,6 +256,7 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 
 - [Laravel](https://laravel.com/)
 - [The Lumen framework](https://lumen.laravel.com/)
+- [JSON Web Token Authentication for Laravel & Lumen](https://jwt-auth.readthedocs.io/en/develop/)
 - [MySQL](https://mysql.com)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
