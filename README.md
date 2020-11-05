@@ -12,6 +12,12 @@ The model is like a 'blueprint' that presents the representation of the entities
 
 # Settings
 
+In the root project folder install composer packages:
+
+```bash
+$ composer install
+```
+
 The files that must be changed for the system to be configured on the server are:
 
 - Rename the file [.env.example](https://github.com/julianomacielferreira/laravel-api/blob/main/.env.example) to **.env**
@@ -36,6 +42,8 @@ DB_PASSWORD=password
 
 CACHE_DRIVER=file
 QUEUE_CONNECTION=sync
+
+JWT_SECRET=
 ```
 
 All the configuration opotions above should be different in your environment (see [Laravel Docs](https://lumen.laravel.com/docs/8.x) to know more about).
@@ -47,6 +55,12 @@ $ php -r "echo md5(uniqid()).\"\n\";"
 ```
 
 and copy the output.
+
+To generate a secret key **JWT_SECRET**:
+
+```bash
+$ php artisan jwt:secret
+```
 
 # Docker
 
@@ -85,12 +99,6 @@ $ docker-compose stop
 See the [references section](#references) to know more or take a look at [MySQL Docker Documentation](https://docs.docker.com/samples/library/mysql/).
 
 # Runing the App
-
-In the root project folder install composer packages:
-
-```bash
-$ composer install
-```
 
 In the root project folder start up the project:
 
