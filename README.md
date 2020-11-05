@@ -256,6 +256,7 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 
 - [Laravel](https://laravel.com/)
 - [The Lumen framework](https://lumen.laravel.com/)
+- [vendor:publish for Lumen framework](https://github.com/laravelista/lumen-vendor-publish)
 - [JSON Web Token Authentication for Laravel & Lumen](https://jwt-auth.readthedocs.io/en/develop/)
 - [MySQL](https://mysql.com)
 - [Docker](https://www.docker.com/)
