@@ -264,8 +264,9 @@ The output:
 Example:
 
 ```bash
-$ curl -d '{"name": "Juliano Maciel", "email":"ju.maciel.ferreira@gmail.com", "password": "password", "password_confirmation": "password"}' \
--H "Content-Type: application/json" \
+$ curl -d \
+'{"name": "Juliano Maciel", "email":"ju.maciel.ferreira@gmail.com", "password": "password", "password_confirmation": "password"}' \
+-H "Content-Type: application/json" \ 
 -X POST http://localhost:8080/api/register
 ```
 
