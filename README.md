@@ -388,15 +388,14 @@ $ curl -H "Content-Type: application/json" \
 The output:
 
 ```json
-{ 
-   {
-       "users":[
-           {
-               "id":1,
-               "name":"Juliano Maciel",
-               "email":"ju.maciel.ferreira@gmail.com",
-               "created_at":"2020-11-06T00:39:50.000000Z",
-               "updated_at":"2020-11-06T00:39:50.000000Z"
+{
+    "users":[
+        {
+            "id":1,
+            "name":"Juliano Maciel",
+            "email":"ju.maciel.ferreira@gmail.com",
+            "created_at":"2020-11-06T00:39:50.000000Z",
+            "updated_at":"2020-11-06T00:39:50.000000Z"
             },{
                 "id":2,
                 "name":"Juliano Maciel",
