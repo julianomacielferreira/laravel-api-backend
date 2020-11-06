@@ -129,23 +129,25 @@ $ curl http://localhost:8080/api/articles/
 The output:
 
 ```json
-[
-    {
-        "idArticle":1,
-        "title":"Title",
-        "description":"Description",
-        "status":1,
-        "created_at":"2020-11-04T15:12:49.000000Z",
-        "updated_at":"2020-11-04T15:12:49.000000Z"
-    },{
-        "idArticle":2,
-        "title":"Title",
-        "description":"Description",
-        "status":1,
-        "created_at":"2020-11-04T15:12:50.000000Z",
-        "updated_at":"2020-11-04T15:12:50.000000Z"
-    }
-]
+{ 
+    "articles": [
+        {
+            "idArticle":1,
+            "title":"Title",
+            "description":"Description",
+            "status":1,
+            "created_at":"2020-11-04T15:12:49.000000Z",
+            "updated_at":"2020-11-04T15:12:49.000000Z"
+        },{
+            "idArticle":2,
+            "title":"Title",
+            "description":"Description",
+            "status":1,
+            "created_at":"2020-11-04T15:12:50.000000Z",
+            "updated_at":"2020-11-04T15:12:50.000000Z"
+        }
+    ]
+}
 ```
 
 ### Retrieve an Article (GET):
@@ -162,16 +164,16 @@ $ curl http://localhost:8080/api/articles/1
 The output:
 
 ```json
-[
-    {
-        "idArticle":1,
-        "title":"Title",
-        "description":"Description",
+{
+    "article": {
+        "id":2,
+        "title":"Title New",
+        "description":"Description New",
         "status":1,
-        "created_at":"2020-11-04T15:12:49.000000Z",
-        "updated_at":"2020-11-04T15:12:49.000000Z"
+        "created_at":"2020-11-06T00:06:37.000000Z",
+        "updated_at":"2020-11-06T00:06:37.000000Z"
     }
-]
+}
 ```
 
 ### Create an Article (POST): 
@@ -244,8 +246,10 @@ $ curl -X DELETE http://localhost:8080/api/articles/19
 
 The output:
 
-```bash
-Deleted successfully
+```json
+{
+    "message": "DELETED"
+}
 ```
 
 ### Create User (POST): 
@@ -271,7 +275,7 @@ The output:
         "created_at":"2020-11-06T12:43:48.000000Z",
         "id":3
     },
-    "message":"CREATED"
+    "message": "CREATED"
 }
 ```
 

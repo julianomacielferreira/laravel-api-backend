@@ -41,14 +41,14 @@ class ArticlesController extends Controller
 
     public function list()
     {
-        return response()->json(Article::all());
+        return response()->json(['articles' => Article::all()]);
     }
 
     public function get($id)
     {
         $article = Article::find($id);
 
-        return response()->json($article);
+        return response()->json(['article' => $article]);
     }
 
     public function create(Request $request)
@@ -77,7 +77,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->delete();
 
-        return response(['message' => 'Deleted successfully'], 200);
+        return response(['message' => 'DELETED'], 200);
     }
 
     private function validate_request(Request $request)
