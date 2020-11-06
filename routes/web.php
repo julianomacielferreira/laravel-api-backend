@@ -41,26 +41,25 @@ $router->group([
     'prefix' => 'api'
 ], function ($router) {
 
-    // Register Routes
+    // User Register Route => /api/register
     $router->post('register', 'AuthController@register');
 
-    // Login Routes
+    // User Login Route  => /api/login
     $router->post('login', 'AuthController@login');
 
+    // User Profile Route  => /api/profile
+    $router->get('profile', 'UserController@profile');
+
+    // User by id Route => /api/users/1
+    $router->get('users/{id}', 'UserController@get');
+
+    // All Users Route => /api/users
+    $router->get('users', 'UserController@list');
+
     // Article Routes
-    $articlesController = 'ArticlesController';
-    $articleURL = 'articles';
-
-    // GET endpoints
-    $router->get($articleURL, "{$articlesController}@list");
-    $router->get($articleURL . "/{id}", "{$articlesController}@get");
-
-    // POST endpoints
-    $router->post($articleURL, "{$articlesController}@create");
-    
-    // PUT endpoints
-    $router->put($articleURL. "/{id}", "{$articlesController}@put");
-
-    // DELETE endpoints
-    $router->delete($articleURL. "/{id}", "{$articlesController}@delete");
+    $router->get('articles', "ArticlesController@list");
+    $router->get('articles/{id}', "ArticlesController@get");
+    $router->post('articles', "ArticlesController@create");
+    $router->put('articles/{id}', "ArticlesController@put");
+    $router->delete('articles/{id}', "ArticlesController@delete");
 });

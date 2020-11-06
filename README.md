@@ -301,6 +301,99 @@ The output:
 }
 ```
 
+### Logged User with token (GET): 
+
+- **/api/profile**
+
+Example:
+
+```bash
+$ curl -H 'Accept: application/json' -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X GET http://localhost:8080/api/profile
+```
+
+The output:
+
+```json
+{
+    "user":{
+        "id":20,
+        "name":"Juliano Maciel",
+        "email":"ju.maciel.ferreira56@gmail.com",
+        "created_at":"2020-11-06T14:44:59.000000Z",
+        "updated_at":"2020-11-06T14:44:59.000000Z"
+    }
+}
+```
+
+### Get User by Id with token (GET): 
+
+- **/api/users/{id}**
+- **id**: number representing the primary key
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X GET http://localhost:8080/api/users/1
+```
+
+The output:
+
+```json
+{
+    "user":{
+        "id":1,
+        "name":"Juliano Maciel",
+        "email":"ju.maciel.ferreira@gmail.com",
+        "created_at":"2020-11-06T00:39:50.000000Z",
+        "updated_at":"2020-11-06T00:39:50.000000Z"
+    }
+}
+```
+
+or:
+
+```json
+{
+    "message":"user not found!"
+}
+```
+
+### List all Users with token (GET): 
+
+- **/api/users**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X GET http://localhost:8080/api/users/
+```
+
+The output:
+
+```json
+{ 
+   {
+       "users":[
+           {
+               "id":1,
+               "name":"Juliano Maciel",
+               "email":"ju.maciel.ferreira@gmail.com",
+               "created_at":"2020-11-06T00:39:50.000000Z",
+               "updated_at":"2020-11-06T00:39:50.000000Z"
+            },{
+                "id":2,
+                "name":"Juliano Maciel",
+                "email":"ju.maciel.ferreira98@gmail.com",
+                "created_at":"2020-11-06T12:24:20.000000Z",
+                "updated_at":"2020-11-06T12:24:20.000000Z"
+                }
+        ]
+}
+```
+
 ## Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)

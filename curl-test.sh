@@ -12,13 +12,14 @@ do
     curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" > curl-output.html
 done
 
+####### GENERATE RANDON ID ###########
+ID=$(($RANDOM%100))
+
 ########## UPDATE ARTICLE ############
-JSON_DATA='{"idArticle": 19, "title":"Title Update","description":"Description Update","status":"1"}'
-ENDPOINT='api/articles/19'
-curl --data "$JSON_DATA" -H "$HEADER" -X PUT "$DOMAIN/$ENDPOINT" > curl-output.html
+JSON_DATA='{"idArticle": '$ID', "title":"Title Update","description":"Description Update","status":"1"}'
+curl --data "$JSON_DATA" -H "$HEADER" -X PUT "$DOMAIN/$ENDPOINT/$ID" > curl-output.html
 
 ########## DELETE ARTICLE ############
-ID=$(($RANDOM%100))
 ENDPOINT='api/articles'
 curl -X DELETE "$DOMAIN/$ENDPOINT/$ID" > curl-output.html
 
@@ -30,4 +31,16 @@ curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" > curl-output.
 ########## USER LOGIN ###############
 JSON_DATA='{"email":"ju.maciel.ferreira'$ID'@gmail.com", "password": "password"}'
 ENDPOINT='api/login'
-curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" > curl-output.html
+TOKEN=$(curl --data "$JSON_DATA" -H "$HEADER" -X POST "$DOMAIN/$ENDPOINT" | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w token | cut -d":" -f2 | sed -e 's/^ *//g' -e 's/ *$//g')
+TOKEN=${TOKEN##*|}
+
+########## USER PROFILE #############
+ENDPOINT='api/profile'
+curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" -X GET "$DOMAIN/$ENDPOINT" > curl-output.html
+
+########## USER BY ID ###############
+ENDPOINT='api/users'
+curl -H "$HEADER" -H "Authorization: Bearer ${TOKEN}" -X GET "$DOMAIN/$ENDPOINT/1" > curl-output.html
+
+########## ALL USERS ################
+curl -H "$HEADER" -H "Authorization: Bearer ${TOKEN}" -X GET "$DOMAIN/$ENDPOINT" > curl-output.html
