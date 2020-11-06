@@ -2,8 +2,8 @@
 
 This project is based on the tutorials:
 
-- [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U), 
-- [Laravel RESTFul API with JSON Web Token JWT](https://www.youtube.com/watch?v=jF9wdF0sViI), 
+- [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U) 
+- [Laravel RESTFul API with JSON Web Token JWT](https://www.youtube.com/watch?v=jF9wdF0sViI) 
 - [AUTENTICAÇÃO EM API REST UTILIZANDO JWT | LARAVEL TIPS #018](https://www.youtube.com/watch?v=Ri-DLFeepbM) 
 - [Build a JWT Authenticated API with Lumen(v5.8)](https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm)
 
