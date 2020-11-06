@@ -23,20 +23,23 @@
  * THE SOFTWARE.
  */
 
-namespace App\Http\Controllers;
+return [
+    'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
+    ],
 
-use Laravel\Lumen\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
+    'guards' => [
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
+    ],
 
-class Controller extends BaseController
-{
-
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60
-        ], 200);
-    }
-}
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => \App\User::class
+        ]
+    ]
+];

@@ -42,7 +42,10 @@ $router->group([
 ], function ($router) {
 
     // Register Routes
-    
+    $router->post('register', 'AuthController@register');
+
+    // Login Routes
+    $router->post('login', 'AuthController@login');
 
     // Article Routes
     $articlesController = 'ArticlesController';

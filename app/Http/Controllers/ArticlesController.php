@@ -57,7 +57,7 @@ class ArticlesController extends Controller
 
         $article = Article::create($request->all());
 
-        return response()->json($article, 201);
+        return response()->json(['article' => $article, 'message' => 'CREATED'], 201);
     }
 
     public function put($id, Request $request)
@@ -68,7 +68,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->update($request->all());
 
-        return response()->json($article, 200);
+        return response()->json(['article' => $article, 'message' => 'UPDATED'], 200);
     }
 
     public function delete($id)
@@ -77,7 +77,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->delete();
 
-        return response('Deleted successfully', 200);
+        return response(['message' => 'Deleted successfully'], 200);
     }
 
     private function validate_request(Request $request)

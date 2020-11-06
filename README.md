@@ -1,6 +1,6 @@
 # Simple API using Laravel Lumen
 
-This project is based on the youtube tutorials [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U) and [Laravel RESTFul API with JSON Web Token JWT](https://www.youtube.com/watch?v=jF9wdF0sViI).
+This project is based on the tutorials [Building a API with Lumen - A PHP framework](https://www.youtube.com/watch?v=6Oxfb_HNY0U), [Laravel RESTFul API with JSON Web Token JWT](https://www.youtube.com/watch?v=jF9wdF0sViI), [AUTENTICAÇÃO EM API REST UTILIZANDO JWT | LARAVEL TIPS #018](https://www.youtube.com/watch?v=Ri-DLFeepbM) and [Build a JWT Authenticated API with Lumen(v5.8)](https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm).
 
 It's using [Lumen PHP Framework](https://lumen.laravel.com/).
 
@@ -190,11 +190,15 @@ The output:
 
 ```json
 {
-    "title":"Title New",
-    "description":"Description New",
-    "status":"1",
-    "updated_at":"2020-11-04T20:17:38.000000Z",
-    "created_at":"2020-11-04T20:17:38.000000Z"
+    "article": {
+        "title":"Title New",
+        "description":"Description New",
+        "status":"1",
+        "updated_at":"2020-11-06T12:27:00.000000Z",
+        "created_at":"2020-11-06T12:27:00.000000Z",
+        "id":800
+    },
+    "message":"CREATED"
 }
 ```
 
@@ -215,12 +219,15 @@ The output:
 
 ```json
 {
-    "idArticle":1,
-    "title":"Title Updated",
-    "description":"Description Updated",
-    "status":"1",
-    "updated_at":"2020-11-04T20:17:38.000000Z",
-    "created_at":"2020-11-04T20:17:38.000000Z"
+    "article":{
+        "id":19,
+        "title":"Title Update",
+        "description":"Description Update",
+        "status":"1",
+        "created_at":"2020-11-06T00:06:39.000000Z",
+        "updated_at":"2020-11-06T00:06:48.000000Z"
+    },
+    "message":"UPDATED"
 }
 ```
 
@@ -239,6 +246,55 @@ The output:
 
 ```bash
 Deleted successfully
+```
+
+### Create User (POST): 
+
+- **/api/register**
+
+Example:
+
+```bash
+$ curl -d '{"name": "Juliano Maciel", "email":"ju.maciel.ferreira@gmail.com", "password": "password", "password_confirmation": "password"}' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/api/register
+```
+
+The output:
+
+```json
+{
+    "user": {
+        "name":"Juliano Maciel",
+        "email":"ju.maciel.ferreira1@gmail.com",
+        "updated_at":"2020-11-06T12:43:48.000000Z",
+        "created_at":"2020-11-06T12:43:48.000000Z",
+        "id":3
+    },
+    "message":"CREATED"
+}
+```
+
+### User Login (POST): 
+
+- **/api/login**
+
+Example:
+
+```bash
+$ curl -d '{"email":"ju.maciel.ferreira@gmail.com", "password": "password"}' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/api/login
+```
+
+The output:
+
+```json
+{
+    "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "token_type":"bearer",
+    "expires_in":3600
+}
 ```
 
 ## Lumen PHP Framework
@@ -272,6 +328,8 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 - [The Lumen framework](https://lumen.laravel.com/)
 - [vendor:publish for Lumen framework](https://github.com/laravelista/lumen-vendor-publish)
 - [JSON Web Token Authentication for Laravel & Lumen](https://jwt-auth.readthedocs.io/en/develop/)
+- [Build a JWT Authenticated API with Lumen(v5.8)](https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm)
+- [AUTENTICAÇÃO EM API REST UTILIZANDO JWT | LARAVEL TIPS #018](https://www.youtube.com/watch?v=Ri-DLFeepbM)
 - [MySQL](https://mysql.com)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)

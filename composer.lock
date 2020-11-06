@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a7bffc7aa45281d54aa6d5e69daf959",
+    "content-hash": "4ddff85efea8e08cac761234969de8c5",
     "packages": [
         {
             "name": "brick/math",
@@ -4106,7 +4106,7 @@
         },
         {
             "name": "tymon/jwt-auth",
-            "version": "1.0.1",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tymondesigns/jwt-auth.git",
@@ -5913,7 +5913,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "tymon/jwt-auth": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
