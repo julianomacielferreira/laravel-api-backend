@@ -119,6 +119,12 @@ $ php -S localhost:8080 -t public
 
 And then access [http://localhost:8080/](http://localhost:8080/) on your browser.
 
+To create some entries simple run the [curl-test.sh](https://github.com/julianomacielferreira/laravel-api/blob/main/curl-test.sh) script:
+
+```bash
+$ ./curl-test.sh
+```
+
 # Enpoints
 
 ### List all Articles (GET): 
@@ -264,8 +270,7 @@ The output:
 Example:
 
 ```bash
-$ curl -d \
-'{"name": "Juliano Maciel", "email":"ju.maciel.ferreira@gmail.com", "password": "password", "password_confirmation": "password"}' \
+$ curl -d '{"name": "Juliano Maciel", "email":"ju.maciel.ferreira@gmail.com", "password": "password", "password_confirmation": "password"}' \
 -H "Content-Type: application/json" \ 
 -X POST http://localhost:8080/api/register
 ```
