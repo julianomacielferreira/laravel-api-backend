@@ -47,6 +47,12 @@ $router->group([
     // User Login Route  => /api/login
     $router->post('login', 'AuthController@login');
 
+    // User Logout Route  => /api/logout
+    $router->post('logout', 'AuthController@logout');
+
+    // Refresh Token Route => /api/refresh
+    $router->post('refresh', 'AuthController@refresh');
+
     // User Profile Route  => /api/profile
     $router->get('profile', 'UserController@profile');
 

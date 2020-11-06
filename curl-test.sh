@@ -44,3 +44,12 @@ curl -H "$HEADER" -H "Authorization: Bearer ${TOKEN}" -X GET "$DOMAIN/$ENDPOINT/
 
 ########## ALL USERS ################
 curl -H "$HEADER" -H "Authorization: Bearer ${TOKEN}" -X GET "$DOMAIN/$ENDPOINT" > curl-output.html
+
+######## REFRESH TOKEN ##############
+ENDPOINT='api/refresh'
+TOKEN=$(curl -H "$HEADER" -H "Authorization: Bearer ${TOKEN}" -X POST "$DOMAIN/$ENDPOINT" | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w token | cut -d":" -f2 | sed -e 's/^ *//g' -e 's/ *$//g')
+TOKEN=${TOKEN##*|}
+
+############ LOGOUT #################
+ENDPOINT='api/logout'
+curl -H "$HEADER" -H "Authorization: Bearer ${TOKEN}" -X POST "$DOMAIN/$ENDPOINT" > curl-output.html

@@ -357,7 +357,7 @@ The output:
 }
 ```
 
-### Logged User with token (GET): 
+### Retrieve Logged User with token (GET): 
 
 - **/api/profile**
 
@@ -383,7 +383,7 @@ The output:
 }
 ```
 
-### Get User by Id with token (GET): 
+### Retrieve User by Id with token (GET): 
 
 - **/api/users/{id}**
 - **id**: number representing the primary key
@@ -427,7 +427,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/users/
+-X GET http://localhost:8080/api/users
 ```
 
 The output:
@@ -441,14 +441,57 @@ The output:
             "email":"ju.maciel.ferreira@gmail.com",
             "created_at":"2020-11-06T00:39:50.000000Z",
             "updated_at":"2020-11-06T00:39:50.000000Z"
-            },{
-                "id":2,
-                "name":"Juliano Maciel",
-                "email":"ju.maciel.ferreira98@gmail.com",
-                "created_at":"2020-11-06T12:24:20.000000Z",
-                "updated_at":"2020-11-06T12:24:20.000000Z"
-                }
-        ]
+            },
+        {
+            "id":2,
+            "name":"Juliano Maciel",
+            "email":"ju.maciel.ferreira98@gmail.com",
+            "created_at":"2020-11-06T12:24:20.000000Z",
+            "updated_at":"2020-11-06T12:24:20.000000Z"
+        }
+    ]
+}
+```
+
+### User Logout with token (POST): 
+
+- **/api/logout**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X POST http://localhost:8080/api/logout
+```
+
+The output:
+
+```json
+{
+    "message":"Successfully logged out"
+}
+```
+
+### Refresh Token (POST): 
+
+- **/api/refresh**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X POST http://localhost:8080/api/refresh
+```
+
+The output:
+
+```json
+{
+    "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "token_type":"bearer",
+    "expires_in":3600
 }
 ```
 
