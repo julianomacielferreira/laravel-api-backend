@@ -308,7 +308,8 @@ The output:
 Example:
 
 ```bash
-$ curl -H 'Accept: application/json' -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+$ curl -H 'Accept: application/json' \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
 -X GET http://localhost:8080/api/profile
 ```
 
@@ -334,7 +335,8 @@ The output:
 Example:
 
 ```bash
-$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
 -X GET http://localhost:8080/api/users/1
 ```
 
@@ -367,7 +369,8 @@ or:
 Example:
 
 ```bash
-$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
 -X GET http://localhost:8080/api/users/
 ```
 
