@@ -41,6 +41,9 @@ $router->group([
     'prefix' => 'api'
 ], function ($router) {
 
+    // Register Routes
+    
+
     // Article Routes
     $articlesController = 'ArticlesController';
     $articleURL = 'articles';
