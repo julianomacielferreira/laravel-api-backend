@@ -111,7 +111,7 @@ Run the migration command after docker start:
 $ php artisan migrate
 ```
 
-Or run the following DDL instructions in the file [db_schema.sql](https://github.com/julianomacielferreira/laravel-api/blob/main/db_schema.sql):
+Or run (i.e, import) the following DDL instructions in the file [db_schema.sql](https://github.com/julianomacielferreira/laravel-api/blob/main/db_schema.sql) directed into the database:
 
 ```sql
 -- DROP AND RECREATE DATABASE
