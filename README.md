@@ -357,9 +357,10 @@ The output:
 }
 ```
 
-### Retrieve Logged User with token (GET): 
+### Retrieve Logged User (GET): 
 
 - **/api/profile**
+- **Needs token.**
 
 Example:
 
@@ -383,10 +384,11 @@ The output:
 }
 ```
 
-### Retrieve User by Id with token (GET): 
+### Retrieve User by Id (GET): 
 
 - **/api/users/{id}**
 - **id**: number representing the primary key
+- **Needs token.**
 
 Example:
 
@@ -418,9 +420,10 @@ or:
 }
 ```
 
-### List all Users with token (GET): 
+### List all Users (GET): 
 
 - **/api/users**
+- **Needs token.**
 
 Example:
 
@@ -453,9 +456,10 @@ The output:
 }
 ```
 
-### User Logout with token (POST): 
+### User Logout (POST): 
 
 - **/api/logout**
+- **Needs token.**
 
 Example:
 
@@ -476,6 +480,7 @@ The output:
 ### Refresh Token (POST): 
 
 - **/api/refresh**
+- **Needs token.**
 
 Example:
 
