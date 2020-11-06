@@ -137,14 +137,14 @@ The output:
 { 
     "articles": [
         {
-            "idArticle":1,
+            "id":1,
             "title":"Title",
             "description":"Description",
             "status":1,
             "created_at":"2020-11-04T15:12:49.000000Z",
             "updated_at":"2020-11-04T15:12:49.000000Z"
         },{
-            "idArticle":2,
+            "id":2,
             "title":"Title",
             "description":"Description",
             "status":1,
@@ -217,7 +217,7 @@ The output:
 Example:
 
 ```bash
-$ curl -d '{"idArticle":1, "title":"Title Updated","description":"Description Updated","status":1}' \
+$ curl -d '{"id":1, "title":"Title Updated","description":"Description Updated","status":1}' \
 -H "Content-Type: application/json" \
 -X PUT http://localhost:8080/api/articles/19
 ```
