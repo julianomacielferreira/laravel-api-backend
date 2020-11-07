@@ -25,7 +25,7 @@ $ composer install
 
 The files that must be changed for the system to be configured on the server are:
 
-- Rename the file [.env.example](https://github.com/julianomacielferreira/laravel-api/blob/main/.env.example) to **.env**
+- Rename the file [.env.example](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/.env.example) to **.env**
 
 ```bash
 APP_NAME=Simple_Laravel_API
@@ -83,7 +83,7 @@ Again, in the root project folder, build the image and fire up the container:
 $ docker-compose up -d --build
 ```
 
-Or simple run the [docker-start.sh](https://github.com/julianomacielferreira/laravel-api/blob/main/docker-start.sh) script:
+Or simple run the [docker-start.sh](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/docker-start.sh) script:
 
 ```bash
 $ ./docker-start.sh
@@ -111,7 +111,7 @@ Run the migration command after docker start:
 $ php artisan migrate
 ```
 
-Or run (i.e, import) the following DDL instructions in the file [db_schema.sql](https://github.com/julianomacielferreira/laravel-api/blob/main/db_schema.sql) directed into the database:
+Or run (i.e, import) the following DDL instructions in the file [db_schema.sql](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/db_schema.sql) directed into the database:
 
 ```sql
 -- DROP AND RECREATE DATABASE
@@ -164,7 +164,7 @@ $ php -S localhost:8080 -t public
 
 And then access [http://localhost:8080/](http://localhost:8080/) on your browser.
 
-To create some entries simple run the [curl-test.sh](https://github.com/julianomacielferreira/laravel-api/blob/main/curl-test.sh) script:
+To create some entries simple run the [curl-test.sh](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/curl-test.sh) script:
 
 ```bash
 $ ./curl-test.sh
