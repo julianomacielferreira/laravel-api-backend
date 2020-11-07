@@ -103,7 +103,7 @@ $ docker-compose stop
 
 See the [references section](#references) to know more or take a look at [MySQL Docker Documentation](https://docs.docker.com/samples/library/mysql/).
 
-# Runing the App
+# Creating the Database
 
 Run the migration command after docker start:
 
@@ -158,6 +158,8 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 ```
+
+# Runing the App
 
 In the root project folder start up the project:
 
