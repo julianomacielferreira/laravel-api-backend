@@ -23,12 +23,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 CREATE TABLE IF NOT EXISTS `article` (
   `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT NOT NULL,
   `status` TINYINT(1) NOT NULL DEFAULT '1',
   `created_at` TIMESTAMP NULL DEFAULT NULL,
   `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX `article_user_id_foreign` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `article_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 --

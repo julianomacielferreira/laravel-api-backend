@@ -64,6 +64,7 @@ $router->group([
 
     // Article Routes
     $router->get('articles', "ArticlesController@list");
+    $router->get('articles/by-user/{user_id}', "ArticlesController@listByUser");
     $router->get('articles/{id}', "ArticlesController@get");
     $router->post('articles', "ArticlesController@create");
     $router->put('articles/{id}', "ArticlesController@put");

@@ -77,7 +77,7 @@ class UserController extends Controller
             return response()->json(['user' => $user], 200);
         } catch (\Exception $e) {
 
-            return response()->json(['message' => 'user not found!'], 404);
+            return response()->json(['message' => 'User not found!'], 404);
         }
     }
 }

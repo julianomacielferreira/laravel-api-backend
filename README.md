@@ -137,12 +137,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 CREATE TABLE IF NOT EXISTS `article` (
   `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT NOT NULL,
   `status` TINYINT(1) NOT NULL DEFAULT '1',
   `created_at` TIMESTAMP NULL DEFAULT NULL,
   `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX `article_user_id_foreign` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `article_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 --
@@ -171,142 +174,6 @@ $ ./curl-test.sh
 ```
 
 # Enpoints
-
-### List all Articles (GET): 
-
-- **/api/articles**
-
-Example:
-
-```bash
-$ curl http://localhost:8080/api/articles/
-```
-
-The output:
-
-```json
-{ 
-    "articles": [
-        {
-            "id":1,
-            "title":"Title",
-            "description":"Description",
-            "status":1,
-            "created_at":"2020-11-04T15:12:49.000000Z",
-            "updated_at":"2020-11-04T15:12:49.000000Z"
-        },{
-            "id":2,
-            "title":"Title",
-            "description":"Description",
-            "status":1,
-            "created_at":"2020-11-04T15:12:50.000000Z",
-            "updated_at":"2020-11-04T15:12:50.000000Z"
-        }
-    ]
-}
-```
-
-### Retrieve an Article (GET):
-
-- **/api/articles/{id}**
-- **id**: number representing the primary key
-
-Example:
-
-```bash
-$ curl http://localhost:8080/api/articles/1
-```
-
-The output:
-
-```json
-{
-    "article": {
-        "id":2,
-        "title":"Title New",
-        "description":"Description New",
-        "status":1,
-        "created_at":"2020-11-06T00:06:37.000000Z",
-        "updated_at":"2020-11-06T00:06:37.000000Z"
-    }
-}
-```
-
-### Create an Article (POST): 
-
-- **/api/articles**
-
-Example:
-
-```bash
-$ curl -d '{"title":"Title New","description":"Description New","status":1}' \
--H "Content-Type: application/json" \
--X POST http://localhost:8080/api/articles
-```
-
-The output:
-
-```json
-{
-    "article": {
-        "title":"Title New",
-        "description":"Description New",
-        "status":"1",
-        "updated_at":"2020-11-06T12:27:00.000000Z",
-        "created_at":"2020-11-06T12:27:00.000000Z",
-        "id":800
-    },
-    "message":"CREATED"
-}
-```
-
-### Update an Article (PUT): 
-
-- **/api/articles/{id}**
-- **id**: number representing the primary key
-
-Example:
-
-```bash
-$ curl -d '{"id":1, "title":"Title Updated","description":"Description Updated","status":1}' \
--H "Content-Type: application/json" \
--X PUT http://localhost:8080/api/articles/19
-```
-
-The output:
-
-```json
-{
-    "article":{
-        "id":19,
-        "title":"Title Update",
-        "description":"Description Update",
-        "status":"1",
-        "created_at":"2020-11-06T00:06:39.000000Z",
-        "updated_at":"2020-11-06T00:06:48.000000Z"
-    },
-    "message":"UPDATED"
-}
-```
-
-### Delete an Article (DELETE): 
-
-- **/api/articles/{id}**
-- **id**: number representing the primary key
-
-Example:
-
-```bash
-$ curl -X DELETE http://localhost:8080/api/articles/19
-```
-
-The output:
-
-```json
-{
-    "message": "DELETED"
-}
-```
 
 ### Create User (POST): 
 
@@ -497,6 +364,202 @@ The output:
     "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
     "token_type":"bearer",
     "expires_in":3600
+}
+```
+
+### List all Articles (GET): 
+
+- **/api/articles**
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X GET http://localhost:8080/api/articles/
+```
+
+The output:
+
+```json
+{ 
+    "articles": 
+    [
+        {
+            "id":1,
+            "user_id":1,
+            "title":"Title",
+            "description":"Description",
+            "status":1,
+            "created_at":"2020-11-04T15:12:49.000000Z",
+            "updated_at":"2020-11-04T15:12:49.000000Z"
+        },{
+            "id":2,
+            "user_id":1,    
+            "title":"Title",
+            "description":"Description",
+            "status":1,
+            "created_at":"2020-11-04T15:12:50.000000Z",
+            "updated_at":"2020-11-04T15:12:50.000000Z"
+        }
+    ]
+}
+```
+
+### List all Articles By User (GET): 
+
+- **/api/articles/by-user/{user_id}**
+- **user_id**: number representing the foreign key
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X GET http://localhost:8080/api/articles/by-user/1
+```
+
+The output:
+
+```json
+{ 
+    "articles": 
+    [
+        {
+            "id":1,
+            "user_id":1,
+            "title":"Title",
+            "description":"Description",
+            "status":1,
+            "created_at":"2020-11-04T15:12:49.000000Z",
+            "updated_at":"2020-11-04T15:12:49.000000Z"
+        },{
+            "id":2,
+            "user_id":1,    
+            "title":"Title",
+            "description":"Description",
+            "status":1,
+            "created_at":"2020-11-04T15:12:50.000000Z",
+            "updated_at":"2020-11-04T15:12:50.000000Z"
+        }
+    ]
+}
+```
+
+### Retrieve Article by Id (GET):
+
+- **/api/articles/{id}**
+- **id**: number representing the primary key
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X GET http://localhost:8080/api/articles/1
+```
+
+The output:
+
+```json
+{
+    "article": {
+        "id":2,
+        "user_id":1,
+        "title":"Title New",
+        "description":"Description New",
+        "status":1,
+        "created_at":"2020-11-06T00:06:37.000000Z",
+        "updated_at":"2020-11-06T00:06:37.000000Z"
+    }
+}
+```
+
+### Create an Article (POST): 
+
+- **/api/articles**
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -d '{"user_id":1,"title":"Title New","description":"Description New","status":1}' \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X POST http://localhost:8080/api/articles
+```
+
+The output:
+
+```json
+{
+    "article": {
+        "user_id":1,
+        "title":"Title New",
+        "description":"Description New",
+        "status":"1",
+        "updated_at":"2020-11-06T12:27:00.000000Z",
+        "created_at":"2020-11-06T12:27:00.000000Z",
+        "id":800
+    },
+    "message":"CREATED"
+}
+```
+
+### Update an Article by Id (PUT): 
+
+- **/api/articles/{id}**
+- **id**: number representing the primary key
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -d '{"user_id":1,"id":1, "title":"Title Updated","description":"Description Updated","status":1}' \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X PUT http://localhost:8080/api/articles/19
+```
+
+The output:
+
+```json
+{
+    "article":{
+        "id":19,
+        "user_id":1,
+        "title":"Title Update",
+        "description":"Description Update",
+        "status":"1",
+        "created_at":"2020-11-06T00:06:39.000000Z",
+        "updated_at":"2020-11-06T00:06:48.000000Z"
+    },
+    "message":"UPDATED"
+}
+```
+
+### Delete an Article (DELETE): 
+
+- **/api/articles/{id}**
+- **id**: number representing the primary key
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X DELETE http://localhost:8080/api/articles/19
+```
+
+The output:
+
+```json
+{
+    "message": "DELETED"
 }
 ```
 

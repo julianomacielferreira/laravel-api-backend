@@ -74,4 +74,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return [];
     }
+
+    /**
+     * Get the articles.
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Models\Article');
+    }
 }

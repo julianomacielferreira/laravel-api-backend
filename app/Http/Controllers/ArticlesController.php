@@ -37,6 +37,7 @@ class ArticlesController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth');
     }
 
     public function list()
@@ -44,11 +45,24 @@ class ArticlesController extends Controller
         return response()->json(['articles' => Article::all()]);
     }
 
+    public function listByUser($user_id)
+    {
+        $articlesByUser = Article::where('user_id', $user_id)->get();
+
+        return response()->json(['articles' => $articlesByUser]);
+    }
+
     public function get($id)
     {
-        $article = Article::find($id);
+        try {
 
-        return response()->json(['article' => $article]);
+            $article = Article::findOrFail($id);
+
+            return response()->json(['article' => $article], 200);
+        } catch (\Exception $e) {
+
+            return response()->json(['message' => 'Article not found!'], 404);
+        }
     }
 
     public function create(Request $request)
@@ -65,19 +79,31 @@ class ArticlesController extends Controller
 
         $this->validate_request($request);
 
-        $article = Article::findOrFail($id);
-        $article->update($request->all());
+        try {
 
-        return response()->json(['article' => $article, 'message' => 'UPDATED'], 200);
+            $article = Article::findOrFail($id);
+            $article->update($request->all());
+
+            return response()->json(['article' => $article, 'message' => 'UPDATED'], 200);
+        } catch (\Exception $e) {
+
+            return response()->json(['message' => 'Article not found!'], 404);
+        }
     }
 
     public function delete($id)
     {
 
-        $article = Article::findOrFail($id);
-        $article->delete();
+        try {
 
-        return response(['message' => 'DELETED'], 200);
+            $article = Article::findOrFail($id);
+            $article->delete();
+
+            return response(['message' => 'DELETED'], 200);
+        } catch (\Exception $e) {
+
+            return response()->json(['message' => 'Article not found!'], 404);
+        }
     }
 
     private function validate_request(Request $request)
@@ -86,8 +112,9 @@ class ArticlesController extends Controller
         $this->validate(
             $request,
             [
-                'title' => 'required',
-                'description' => 'required',
+                'user_id' => 'required',
+                'title' => 'required|string',
+                'description' => 'required|string',
             ]
         );
     }
