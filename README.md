@@ -598,6 +598,7 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 - [JSON Web Token Authentication for Laravel & Lumen](https://jwt-auth.readthedocs.io/en/develop/)
 - [Build a JWT Authenticated API with Lumen(v5.8)](https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm)
 - [AUTENTICAÇÃO EM API REST UTILIZANDO JWT | LARAVEL TIPS #018](https://www.youtube.com/watch?v=Ri-DLFeepbM)
+- [Fix Error “CORS” For Laravel Lumen Application](https://medium.com/@afrimadonidinata/fix-error-cors-for-laravel-lumen-application-8ac24d85ea71)
 - [MySQL](https://mysql.com)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
