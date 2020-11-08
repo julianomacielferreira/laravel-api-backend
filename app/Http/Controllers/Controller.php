@@ -34,6 +34,7 @@ class Controller extends BaseController
     protected function respondWithToken($token)
     {
         return response()->json([
+            'message' => 'Authorized',
             'token' => $token,
             'token_type' => 'bearer',
             'expires_in' => Auth::factory()->getTTL() * 60

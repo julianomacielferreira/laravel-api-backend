@@ -220,6 +220,7 @@ The output:
 
 ```json
 {
+    "message": "Authorized",
     "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
     "token_type":"bearer",
     "expires_in":3600
