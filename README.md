@@ -227,6 +227,50 @@ The output:
 }
 ```
 
+### User Logout (POST): 
+
+- **/api/logout**
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X POST http://localhost:8080/api/logout
+```
+
+The output:
+
+```json
+{
+    "message":"Successfully logged out"
+}
+```
+
+### Refresh Token (POST): 
+
+- **/api/refresh**
+- **Needs token.**
+
+Example:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+-X POST http://localhost:8080/api/refresh
+```
+
+The output:
+
+```json
+{
+    "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "token_type":"bearer",
+    "expires_in":3600
+}
+```
+
 ### Retrieve Logged User (GET): 
 
 - **/api/profile**
@@ -323,50 +367,6 @@ The output:
             "updated_at":"2020-11-06T12:24:20.000000Z"
         }
     ]
-}
-```
-
-### User Logout (POST): 
-
-- **/api/logout**
-- **Needs token.**
-
-Example:
-
-```bash
-$ curl -H "Content-Type: application/json" \
--H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X POST http://localhost:8080/api/logout
-```
-
-The output:
-
-```json
-{
-    "message":"Successfully logged out"
-}
-```
-
-### Refresh Token (POST): 
-
-- **/api/refresh**
-- **Needs token.**
-
-Example:
-
-```bash
-$ curl -H "Content-Type: application/json" \
--H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X POST http://localhost:8080/api/refresh
-```
-
-The output:
-
-```json
-{
-    "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-    "token_type":"bearer",
-    "expires_in":3600
 }
 ```
 
