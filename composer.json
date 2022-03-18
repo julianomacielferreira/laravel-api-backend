@@ -1,11 +1,15 @@
 {
     "name": "laravel/lumen",
     "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "keywords": [
+        "framework",
+        "laravel",
+        "lumen"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4",
         "laravel/lumen-framework": "^7.0",
         "laravelista/lumen-vendor-publish": "^7.0",
         "tymon/jwt-auth": "dev-develop"
