@@ -227,7 +227,7 @@ Alter the file hosts on /etc directory:
 $ sudo nano /etc/hosts
 ```
 
-Adding the following entry:
+Adding the following host entry **laravel-api-backend.localhost** to hosts file:
 
 ```bash
 # APIs and Projects
