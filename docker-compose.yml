@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
     database:
-        image: mysql/mysql-server:5.7.9
+        image: mysql/mysql-server:5.7
         volumes:
             - ./docker/mysql/data:/var/lib/mysql
             - ./docker/mysql/conf.d:/etc/mysql/conf.d
@@ -21,3 +21,33 @@ services:
         hostname: mailhog
         ports:
             - "8025:8025"
+
+    php74-fpm:
+        build: ./docker/
+        container_name: php74-fpm
+        volumes:
+            - ./:/var/www/html/
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        depends_on:
+            - database
+            - mailhog
+
+    server:
+        image: nginx:latest
+        container_name: server
+        volumes:
+          - ./docker/nginx:/etc/nginx/conf.d
+          - ./:/var/www/html
+        ports:
+          - "80:80"
+        networks:
+            default:
+                aliases:
+                    - laravel-api-backend.localhost
+        depends_on:
+            - php74-fpm
+    
+networks:
+  default:
+    driver: bridge
