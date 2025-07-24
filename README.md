@@ -15,61 +15,27 @@ The model is like a 'blueprint' that presents the representation of the entities
 
 ![](DB_MODEL_LARAVEL_API.png)
 
-# Settings
-
-In the root project folder install composer packages:
-
-```bash
-$ composer install
-```
-
-The files that must be changed for the system to be configured on the server are:
-
-- Rename the file [.env.example](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/.env.example) to **.env**
-
-```bash
-APP_NAME=Simple_Laravel_API
-APP_ENV=local
-APP_KEY=1a4bebaa89c41869df6290fa928db22b
-APP_DEBUG=true
-APP_URL=http://localhost
-APP_TIMEZONE=UTC
-
-LOG_CHANNEL=stack
-LOG_SLACK_WEBHOOK_URL=
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel_api
-DB_USERNAME=laravel
-DB_PASSWORD=password
-
-CACHE_DRIVER=file
-QUEUE_CONNECTION=sync
-
-JWT_SECRET=
-```
-
-All the configuration opotions above should be different in your environment (see [Laravel Docs](https://lumen.laravel.com/docs/8.x) to know more about).
-
-To generate a random **APP_KEY** just run the command on terminal:
-
-```bash
-$ php -r "echo md5(uniqid()).\"\n\";"
-```
-
-and copy the output.
-
-To generate a secret key **JWT_SECRET**:
-
-```bash
-$ php artisan jwt:secret
-```
-
-# Docker
+# Build Docker Image
 
 **[Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/) must be installed.**
+
+The file structure for docker configuration files are:
+
+```
+.
+├── docker
+│   ├── Dockerfile
+│   ├── mysql
+│   │   ├── conf.d
+│   │   │   └── my.cnf
+│   │   └── data
+│   ├── nginx
+│   │   └── laravel-api-backend.localhost.conf
+│   └── php
+│       ├── 99-xdebug.ini
+│       └── php.ini
+
+```
 
 First create a directory called **data** in the root project folder:
 
@@ -77,10 +43,22 @@ First create a directory called **data** in the root project folder:
 $ mkdir -p docker/mysql/data
 ```
 
-Again, in the root project folder, build the image and fire up the container:
+Give write permission to storage folder:
 
 ```bash
-$ docker-compose up -d --build
+$ chmod 777 -R storage
+```
+
+Build the docker image (it will be using the Dockerfile in docker directory for the php 7.4):
+
+```bash
+$ docker-compose build
+```
+
+Fire up the container:
+
+```bash
+$ docker-compose up
 ```
 
 Or simple run the [docker-start.sh](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/docker-start.sh) script:
@@ -101,11 +79,93 @@ To stop the container before moving on:
 $ docker-compose stop
 ```
 
+or
+
+```bash
+$ docker-compose down
+```
+
 See the [references section](#references) to know more or take a look at [MySQL Docker Documentation](https://docs.docker.com/samples/library/mysql/).
+
+# Composer dependencies
+
+Check if the containers are running:
+
+```bash
+$ docker ps
+```
+
+The output should be something like:
+
+![](docker-ps-output.png)
+
+Enter in the **php74-fpm** container with the following command:
+
+```bash
+$ docker exec -it php74-fpm bash
+```
+
+And install the laravel composer dependencies:
+
+```bash
+$ composer install
+```
+
+Generate the random **APP_KEY** running the following command (remember to copy the output):
+
+```bash
+$ php -r "echo md5(uniqid()).\"\n\";"
+```
+
+and copy the output.
+
+Generate a secret key **JWT_SECRET** with the artisan command (remember to copy the output):
+
+```bash
+$ php artisan jwt:secret
+```
+
+The two configuration options above should be created inside the docker container **php74-fpm** and will be different in your environment (see [Laravel Docs](https://lumen.laravel.com/docs/8.x) to know more about).
+
+# .ENV Settings
+
+The files that must be changed for the system to be configured on the server are:
+
+- Rename the file [.env.example](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/.env.example) to **.env**
+
+```bash
+APP_NAME=Simple_Laravel_API
+APP_ENV=local
+APP_KEY= # use the output of the `php -r "echo md5(uniqid()).\"\n\";" command`
+APP_DEBUG=true
+APP_URL=http://localhost
+APP_TIMEZONE=UTC
+
+LOG_CHANNEL=stack
+LOG_SLACK_WEBHOOK_URL=
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_api
+DB_USERNAME=laravel
+DB_PASSWORD=password
+
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+
+JWT_SECRET= # use the output of the `php artisan jwt:secret` command
+```
 
 # Creating the Database
 
-Run the migration command after docker start:
+Enter inside the **php74-fpm** container with the following command:
+
+```bash
+$ docker exec -it php74-fpm bash
+```
+
+Run the migration command:
 
 ```bash
 $ php artisan migrate
@@ -159,15 +219,34 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 ```
 
-# Runing the App
+# Add Project Localhost URL to /etc/hosts
 
-In the root project folder start up the project:
+Alter the file hosts on /etc directory:
 
 ```bash
-$ php -S localhost:8080 -t public
+$ sudo nano /etc/hosts
 ```
 
-And then access [http://localhost:8080/](http://localhost:8080/) on your browser.
+Adding the following entry:
+
+```bash
+# APIs and Projects
+127.0.0.1	laravel-api-backend.localhost
+```
+
+This is because the nginx config file [laravel-api-backend.localhost.conf](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/docker/nginx/laravel-api-backend.localhost.conf) (on line 3) configure the server name directive to:
+
+```
+server_name laravel-api-backend.localhost;
+```
+
+# Access the microservice
+
+If all the configuration above was successfull you should access [http://laravel-api-backend.localhost/](http://laravel-api-backend.localhost/) on your browser and see:
+
+```
+Lumen (7.2.2) (Laravel Components ^7.0)
+``` 
 
 To create some entries simple run the [curl-test.sh](https://github.com/julianomacielferreira/laravel-api-backend/blob/main/curl-test.sh) script:
 
@@ -175,7 +254,23 @@ To create some entries simple run the [curl-test.sh](https://github.com/julianom
 $ ./curl-test.sh
 ```
 
-# Enpoints
+The output should see something like:
+
+```bash
+$ ./curl-test.sh 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   317    0   188  100   129   1435    985 --:--:-- --:--:-- --:--:--  2438
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   478    0   412  100    66   3375    540 --:--:-- --:--:-- --:--:--  3950
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   168    0   168    0     0   3076      0 --:--:-- --:--:-- --:--:--  3111
+...
+```
+
+# Endpoints
 
 ### Create User (POST): 
 
@@ -186,7 +281,7 @@ Example:
 ```bash
 $ curl -d '{"name": "Juliano Maciel", "email":"ju.maciel.ferreira@gmail.com", "password": "password", "password_confirmation": "password"}' \
 -H "Content-Type: application/json" \ 
--X POST http://localhost:8080/api/register
+-X POST http://laravel-api-backend.localhost/api/register
 ```
 
 The output:
@@ -213,7 +308,7 @@ Example:
 ```bash
 $ curl -d '{"email":"ju.maciel.ferreira@gmail.com", "password": "password"}' \
 -H "Content-Type: application/json" \
--X POST http://localhost:8080/api/login
+-X POST http://laravel-api-backend.localhost/api/login
 ```
 
 The output:
@@ -237,7 +332,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X POST http://localhost:8080/api/logout
+-X POST http://laravel-api-backend.localhost/api/logout
 ```
 
 The output:
@@ -258,7 +353,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X POST http://localhost:8080/api/refresh
+-X POST http://laravel-api-backend.localhost/api/refresh
 ```
 
 The output:
@@ -281,7 +376,7 @@ Example:
 ```bash
 $ curl -H 'Accept: application/json' \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/profile
+-X GET http://laravel-api-backend.localhost/api/profile
 ```
 
 The output:
@@ -309,7 +404,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/users/1
+-X GET http://laravel-api-backend.localhost/api/users/1
 ```
 
 The output:
@@ -344,7 +439,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/users
+-X GET http://laravel-api-backend.localhost/api/users
 ```
 
 The output:
@@ -380,7 +475,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/articles/
+-X GET http://laravel-api-backend.localhost/api/articles/
 ```
 
 The output:
@@ -421,7 +516,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/articles/by-user/1
+-X GET http://laravel-api-backend.localhost/articles/by-user/1
 ```
 
 The output:
@@ -462,7 +557,7 @@ Example:
 ```bash
 $ curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X GET http://localhost:8080/api/articles/1
+-X GET http://laravel-api-backend.localhost/api/articles/1
 ```
 
 The output:
@@ -492,7 +587,7 @@ Example:
 $ curl -d '{"user_id":1,"title":"Title New","description":"Description New","status":1}' \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X POST http://localhost:8080/api/articles
+-X POST http://laravel-api-backend.localhost/api/articles
 ```
 
 The output:
@@ -524,7 +619,7 @@ Example:
 $ curl -d '{"user_id":1,"id":1, "title":"Title Updated","description":"Description Updated","status":1}' \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X PUT http://localhost:8080/api/articles/19
+-X PUT http://laravel-api-backend.localhost/api/articles/19
 ```
 
 The output:
@@ -555,7 +650,7 @@ Example:
 ```bash
 $ curl \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
--X DELETE http://localhost:8080/api/articles/19
+-X DELETE http://laravel-api-backend.localhost/api/articles/19
 ```
 
 The output:
@@ -603,3 +698,5 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 - [MySQL](https://mysql.com)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- [nginx](https://nginx.org/)
+- [Xdebug](https://xdebug.org/)
