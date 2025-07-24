@@ -1,6 +1,6 @@
 #!/bin/bash
 ########## GLOBAL VARS #######
-DOMAIN='http://localhost:8080'
+DOMAIN='http://laravel-api-backend.localhost/'
 HEADER='Content-Type: application/json'
 ID=$(($RANDOM%100))
 
